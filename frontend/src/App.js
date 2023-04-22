@@ -18,6 +18,13 @@ class App {
       },
     });
 
+    this.randomBtn = new RandomBtn({
+      $target,
+      onClick: () => {
+        api.fetchRandomCats().then(({ data }) => this.setState(data));
+      },
+    });
+
     this.searchResult = new SearchResult({
       $target,
       initialData: this.data,

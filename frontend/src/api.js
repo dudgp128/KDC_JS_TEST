@@ -5,4 +5,8 @@ const api = {
     const res = await fetch(`${API_ENDPOINT}/api/cats/search?q=${keyword}`);
     return await res.json();
   },
+  fetchRandomCats: async () => {
+    const res = await fetch(`${API_ENDPOINT}/api/cats/random50`);
+    return await res.json();
+  },
 };
