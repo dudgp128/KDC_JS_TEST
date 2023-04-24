@@ -13,6 +13,15 @@ class ImageInfo {
     this.render();
   }
 
+  showDetail(data) {
+    api.fetchInfo(data.id).then(({ data }) => {
+      return this.setState({
+        visible: true,
+        data,
+      });
+    });
+  }
+
   setState(nextData) {
     this.data = nextData;
     this.render();
@@ -20,7 +29,7 @@ class ImageInfo {
 
   render() {
     if (this.data.visible) {
-      const { name, url, temperament, origin } = this.data.image;
+      const { name, url, temperament, origin } = this.data.data;
 
       this.$imageInfo.innerHTML = `
         <div class="content-wrapper">
