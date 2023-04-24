@@ -27,7 +27,7 @@ class SearchResult {
       .map(
         (cat) => `
           <li class="item">
-            <img src=${cat.url} alt=${cat.name} />
+            <img src=${cat.url} alt=${cat.name} id=${cat.id}/>
           </li>
         `
       )

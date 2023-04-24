@@ -40,9 +40,11 @@ class App {
       $target,
       initialData: this.data,
       onClick: (image) => {
-        this.imageInfo.setState({
-          visible: true,
-          image,
+        api.fetchInfo(image.id).then(({ data }) => {
+          return this.imageInfo.setState({
+            visible: true,
+            image: data,
+          });
         });
       },
     });
