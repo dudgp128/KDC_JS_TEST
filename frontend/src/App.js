@@ -13,6 +13,7 @@ class App {
 
     this.searchInput = new SearchInput({
       $target,
+      // 검색창
       onSearch: (keyword) => {
         this.loading.show();
         api.fetchCats(keyword).then(({ data }) => {
@@ -20,17 +21,15 @@ class App {
           return this.setState(data);
         });
       },
+
+      // 랜덤버튼
+      onClick: () => {
+        api.fetchRandomCats().then(({ data }) => this.setState(data));
+      },
     });
 
     this.loading = new Loading({
       $target,
-    });
-
-    this.randomBtn = new RandomBtn({
-      $target,
-      onClick: () => {
-        api.fetchRandomCats().then(({ data }) => this.setState(data));
-      },
     });
 
     this.searchResult = new SearchResult({

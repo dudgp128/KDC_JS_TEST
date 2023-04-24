@@ -1,16 +1,15 @@
 const TEMPLATE = '<input type="text">';
 
 class SearchInput {
-  constructor({ $target, onSearch }) {
+  constructor({ $target, onSearch, onClick }) {
     const $wraaper = document.createElement("section");
+
+    // 검색창
     const $searchInput = document.createElement("input");
     this.$searchInput = $searchInput;
-    this.$searchInput.placeholder = "고양이를 검색해보세요.|";
-
     $searchInput.className = "SearchInput";
-
+    this.$searchInput.placeholder = "고양이를 검색해보세요.|";
     $wraaper.appendChild($searchInput);
-    $target.appendChild($wraaper);
 
     $searchInput.addEventListener("keyup", (e) => {
       if (e.keyCode === 13) {
@@ -18,7 +17,18 @@ class SearchInput {
       }
     });
 
-    console.log("SearchInput created.", this);
+    // 랜덤 버튼
+    const $randomBtn = document.createElement("button");
+    this.$randomBtn = $randomBtn;
+    $randomBtn.className = "RandomBtn";
+    $randomBtn.textContent = "랜덤버튼";
+    $wraaper.appendChild($randomBtn);
+
+    $randomBtn.addEventListener("click", (e) => {
+      onClick();
+    });
+
+    $target.appendChild($wraaper);
   }
   render() {}
 }
