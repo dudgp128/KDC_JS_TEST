@@ -39,13 +39,8 @@ class App {
     this.searchResult = new SearchResult({
       $target,
       initialData: this.data,
-      onClick: (image) => {
-        api.fetchInfo(image.id).then(({ data }) => {
-          return this.imageInfo.setState({
-            visible: true,
-            image: data,
-          });
-        });
+      onClick: (data) => {
+        this.imageInfo.showDetail(data);
       },
     });
 
@@ -53,7 +48,7 @@ class App {
       $target,
       data: {
         visible: false,
-        image: null,
+        data: null,
       },
     });
   }

@@ -27,6 +27,10 @@ class ImageInfo {
     this.render();
   }
 
+  closeImageInfo() {
+    this.$imageInfo.style.display = "none";
+  }
+
   render() {
     if (this.data.visible) {
       const { name, url, temperament, origin } = this.data.data;
@@ -44,6 +48,19 @@ class ImageInfo {
           </div>
         </div>`;
       this.$imageInfo.style.display = "block";
+
+      document.querySelector(".close").addEventListener("click", () => {
+        return this.closeImageInfo();
+      });
+
+      document.addEventListener("click", (e) => {
+        const popup = document.querySelector(".content-wrapper");
+        return popup.contains(e.target) ? null : this.closeImageInfo();
+      });
+
+      document.addEventListener("keyup", (e) => {
+        return e.key === "Escape" ? this.closeImageInfo() : null;
+      });
     } else {
       this.$imageInfo.style.display = "none";
     }
