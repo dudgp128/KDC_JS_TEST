@@ -10,6 +10,11 @@
   --textColor:white;
 }
 
+:root[color-mode="light"]{
+  --background:#fff;
+  --textColor:black;
+}
+
 body{
   background-color: var(--background);
   color: var(--textColor);
@@ -103,9 +108,10 @@ body * {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  background-color: #fff;
   border: 1px solid #eee;
   border-radius: 5px;
+  background-color: var(--background);
+  color: var(--textColor);
 }
 
 .ImageInfo .content-wrapper img {
