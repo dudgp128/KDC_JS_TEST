@@ -32,23 +32,10 @@ class Loading {
   }
 
   render() {
-    if (this.data.show) {
-      this.$loading.innerHTML = `
-        <div>
-            <h3> 로딩 </h3>
-        </div>
-        `;
-    } else {
-      this.$loading.innerHTML = `
-      <div>
-        <h3> 로딩 완료 </h3>
-      </div>
-    `;
-    }
-    // this.$loading.innerHTML = this.data.show
-    //   ? `<div class="Loading">
-    // <h1>로딩</h1>
-    // </div>`
-    //   : ``;
+    this.$loading.innerHTML = this.data.show
+      ? `<div class="Loading">
+             <p> 로딩중💦 </p>
+        </div>`
+      : ``;
   }
 }

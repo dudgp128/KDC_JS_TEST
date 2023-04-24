@@ -14,13 +14,11 @@ class App {
     this.searchInput = new SearchInput({
       $target,
       onSearch: (keyword) => {
-        // 로딩 전
         this.loading.show();
         api.fetchCats(keyword).then(({ data }) => {
           this.loading.hide();
           return this.setState(data);
         });
-        // 로딩 후
       },
     });
 
