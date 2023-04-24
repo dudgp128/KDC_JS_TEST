@@ -24,7 +24,11 @@ class App {
 
       // 랜덤버튼
       onClick: () => {
-        api.fetchRandomCats().then(({ data }) => this.setState(data));
+        this.loading.show();
+        api.fetchRandomCats().then(({ data }) => {
+          this.loading.hide();
+          return this.setState(data);
+        });
       },
     });
 
