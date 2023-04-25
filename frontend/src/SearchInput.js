@@ -21,7 +21,7 @@ class SearchInput {
     const $randomBtn = document.createElement("button");
     this.$randomBtn = $randomBtn;
     $randomBtn.className = "RandomBtn";
-    $randomBtn.textContent = "랜덤버튼";
+    $randomBtn.textContent = "🎲랜덤";
     $wraaper.appendChild($randomBtn);
 
     $randomBtn.addEventListener("click", (e) => {
