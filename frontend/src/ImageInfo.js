@@ -61,7 +61,7 @@ class ImageInfo {
       });
 
       document.addEventListener("keyup", (e) => {
-        return e.key === "Escape" ? this.closeImageInfo() : null;
+        e.key === "Escape" ? this.closeImageInfo() : null;
       });
     } else {
       this.$imageInfo.style.display = "none";
