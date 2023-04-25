@@ -57,8 +57,7 @@ class ImageInfo {
       });
 
       document.addEventListener("click", (e) => {
-        const popup = document.querySelector(".content-wrapper");
-        return popup.contains(e.target) ? null : this.closeImageInfo();
+        return e.target.className == "ImageInfo" ? this.closeImageInfo() : null;
       });
 
       document.addEventListener("keyup", (e) => {
