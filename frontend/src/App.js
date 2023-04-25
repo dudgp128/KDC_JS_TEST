@@ -18,7 +18,8 @@ class App {
         this.loading.show();
         api.fetchCats(keyword).then(({ data }) => {
           this.loading.hide();
-          return this.setState(data);
+          this.recentSearch.setState(keyword);
+          this.setState(data);
         });
       },
 
@@ -33,6 +34,10 @@ class App {
     });
 
     this.loading = new Loading({
+      $target,
+    });
+
+    this.recentSearch = new RecentSearch({
       $target,
     });
 
