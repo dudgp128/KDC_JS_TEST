@@ -28,7 +28,10 @@ class ImageInfo {
   }
 
   closeImageInfo() {
-    this.$imageInfo.style.display = "none";
+    this.setState({
+      visible: false,
+      data: undefined,
+    });
   }
 
   render() {
