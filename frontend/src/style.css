@@ -79,9 +79,15 @@ body * {
 }
 
 .SearchInput {
-  width: 100%;
+  width: 80%;
   font-size: 40px;
   padding: 10px 15px;
+}
+
+.RandomBtn {
+  width: 18%;
+  font-size: 40px;
+  cursor: pointer;
 }
 
 .ImageInfo {
@@ -116,6 +122,11 @@ body * {
 
 .ImageInfo .content-wrapper img {
   width: 100%;
+}
+
+.ImageInfo .close {
+  padding: 0px 2px;
+  cursor: pointer;
 }
 
 /* 디바이스 가로 길이 따라 검색결과의 column 갯수 변경하기*/
