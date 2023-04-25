@@ -50,14 +50,14 @@ class ImageInfo {
             <div>태생: ${origin}</div>
           </div>
         </div>`;
+
       this.$imageInfo.style.display = "block";
 
-      document.querySelector(".close").addEventListener("click", () => {
-        return this.closeImageInfo();
-      });
-
+      // 모달 닫기
       document.addEventListener("click", (e) => {
-        return e.target.className == "ImageInfo" ? this.closeImageInfo() : null;
+        e.target.className === "close" || "ImageInfo"
+          ? this.closeImageInfo()
+          : null;
       });
 
       document.addEventListener("keyup", (e) => {
