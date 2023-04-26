@@ -19,6 +19,7 @@ class RecentSearch {
   }
 
   setState(nextData) {
+    this.wordList.length >= 5 ? this.wordList.shift() : null;
     this.wordList.push(nextData);
     this.setlocalStorage();
 
