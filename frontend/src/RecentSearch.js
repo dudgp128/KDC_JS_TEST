@@ -1,7 +1,6 @@
 class RecentSearch {
   $recentSearch = null;
   searchList = null;
-  data = null;
   onClick = null;
   wordList = [];
 
@@ -17,12 +16,10 @@ class RecentSearch {
 
   setlocalStorage() {
     localStorage.setItem("searchList", JSON.stringify(this.wordList));
-    console.log("local", localStorage.getItem("searchList"));
   }
 
   setState(nextData) {
-    this.data = nextData;
-    this.wordList.push(this.data);
+    this.wordList.push(nextData);
     this.setlocalStorage();
 
     this.render();
@@ -37,8 +34,6 @@ class RecentSearch {
       `
         )
         .join("");
-    } else {
-      this.$recentSearch.innerHTML = `<p> nothing </p>`;
     }
   }
 }
