@@ -39,6 +39,13 @@ class App {
 
     this.recentSearch = new RecentSearch({
       $target,
+      onClick: (keyword) => {
+        this.loading.show();
+        api.fetchCats(keyword).then(({ data }) => {
+          this.loading.hide();
+          return this.setState(data);
+        });
+      },
     });
 
     this.searchResult = new SearchResult({

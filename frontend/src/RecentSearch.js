@@ -35,5 +35,10 @@ class RecentSearch {
         )
         .join("");
     }
+    this.$recentSearch.querySelectorAll(".item").forEach(($item, index) => {
+      $item.addEventListener("click", () => {
+        this.onClick(this.wordList[index]);
+      });
+    });
   }
 }
