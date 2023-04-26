@@ -23,20 +23,28 @@ class SearchResult {
   }
 
   render() {
-    this.$searchResult.innerHTML = this.data
-      .map(
-        (cat) => `
+    if (this.data.length != 0) {
+      this.$searchResult.innerHTML = this.data
+        .map(
+          (cat) => `
           <li class="item">
             <img src=${cat.url} alt=${cat.name} id=${cat.id}/>
           </li>
         `
-      )
-      .join("");
+        )
+        .join("");
 
-    this.$searchResult.querySelectorAll(".item").forEach(($item, index) => {
-      $item.addEventListener("click", () => {
-        this.onClick(this.data[index]);
+      this.$searchResult.querySelectorAll(".item").forEach(($item, index) => {
+        $item.addEventListener("click", () => {
+          this.onClick(this.data[index]);
+        });
       });
-    });
+    } else {
+      this.$searchResult.innerHTML = `
+        <div> 
+          <p> 해당 검색 결과가 없습니다. </p>
+        </div>
+      `;
+    }
   }
 }
