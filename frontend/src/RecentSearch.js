@@ -31,12 +31,12 @@ class RecentSearch {
       this.$recentSearch.innerHTML = this.wordList
         .map(
           (word) => `
-       <li class = "item" > ${word} </li>
+       <li> <button> ${word} </button> </li>
       `
         )
         .join("");
     }
-    this.$recentSearch.querySelectorAll(".item").forEach(($item, index) => {
+    this.$recentSearch.querySelectorAll("li button").forEach(($item, index) => {
       $item.addEventListener("click", () => {
         this.onClick(this.wordList[index]);
       });
