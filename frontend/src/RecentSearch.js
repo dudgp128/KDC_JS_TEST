@@ -1,8 +1,6 @@
 class RecentSearch {
   $recentSearch = null;
-  searchList = null;
-  onClick = null;
-  wordList = [];
+  data = null;
 
   constructor({ $target, onClick }) {
     const $recentSearch = document.createElement("section");
@@ -11,31 +9,34 @@ class RecentSearch {
 
     this.onClick = onClick;
 
+    this.init();
     this.render();
   }
 
-  setlocalStorage() {
-    localStorage.setItem("searchList", JSON.stringify(this.wordList));
+  // 최근 검색 기록 가져오기
+  init() {
+    let words =
+      localStorage.getItem("keywordHistory") === null
+        ? []
+        : localStorage.getItem("keywordHistory").split(",");
+    this.setState(words);
   }
 
+  // 최근 검색 기록 업데이트 하기
   setState(nextData) {
-    this.wordList.length >= 5 ? this.wordList.shift() : null;
-    this.wordList.push(nextData);
-    this.setlocalStorage();
-
+    this.data = nextData;
     this.render();
   }
 
   render() {
-    if (this.wordList.length != 0) {
-      this.$recentSearch.innerHTML = this.wordList
-        .map(
-          (word) => `
-       <li> <button> ${word} </button> </li>
-      `
-        )
-        .join("");
-    }
+    this.$recentSearch.innerHTML = this.data
+      .map(
+        (word) => `
+         <li> <button> ${word} </button> </li>
+        `
+      )
+      .join("");
+
     this.$recentSearch.querySelectorAll("li button").forEach(($item, index) => {
       $item.addEventListener("click", () => {
         this.onClick(this.wordList[index]);
@@ -43,3 +44,4 @@ class RecentSearch {
     });
   }
 }
+``;

@@ -15,8 +15,12 @@ class App {
       $target,
       // 검색창
       onSearch: (keyword) => {
-        this.recentSearch.setState(keyword);
-        this.searchCat(keyword);
+        this.loading.show();
+        api.fetchCats(keyword).then(({ data }) => {
+          this.loading.hide();
+          this.recentSearch.init();
+          this.setState(data);
+        });
       },
 
       // 랜덤버튼
@@ -36,7 +40,11 @@ class App {
     this.recentSearch = new RecentSearch({
       $target,
       onClick: (keyword) => {
-        this.searchCat(keyword);
+        this.loading.show();
+        api.fetchCats(keyword).then(({ data }) => {
+          this.loading.hide();
+          this.setState(data);
+        });
       },
     });
 
@@ -54,14 +62,6 @@ class App {
         visible: false,
         data: null,
       },
-    });
-  }
-
-  searchCat(keyword) {
-    this.loading.show();
-    api.fetchCats(keyword).then(({ data }) => {
-      this.loading.hide();
-      this.setState(data);
     });
   }
 
