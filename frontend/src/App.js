@@ -3,6 +3,7 @@ console.log("app is running!");
 class App {
   $target = null;
   data = [];
+  page = 1;
 
   constructor($target) {
     this.$target = $target;
@@ -55,6 +56,19 @@ class App {
       initialData: this.data,
       onClick: (data) => {
         this.imageInfo.showDetail(data);
+      },
+
+      onNextPage: () => {
+        console.log("업데이트");
+        const lastWord = localStorage.getItem("lastWord");
+        const page = this.page + 1;
+        this.loading.show();
+        api.fetchCatsPage(lastWord, page).then(({ data }) => {
+          let newData = this.data.concat(data);
+          this.setState(newData);
+          this.page = page;
+          this.loading.hide();
+        });
       },
     });
 

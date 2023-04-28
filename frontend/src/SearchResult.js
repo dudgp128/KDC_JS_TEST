@@ -2,17 +2,17 @@ class SearchResult {
   $searchResult = null;
   data = null;
   onClick = null;
+  onNextPage = null;
 
-  constructor({ $target, initialData, onClick }) {
-    //const $wraaper = document.createElement("section");
+  constructor({ $target, initialData, onClick, onNextPage }) {
     this.$searchResult = document.createElement("ul");
     this.$searchResult.className = "SearchResult";
 
-    //$wraaper.appendChild(this.$searchResult);
     $target.appendChild(this.$searchResult);
 
     this.data = initialData;
     this.onClick = onClick;
+    this.onNextPage = onNextPage;
 
     this.render();
   }
@@ -21,6 +21,29 @@ class SearchResult {
     this.data = nextData;
     this.render();
   }
+
+  // 'el' 요소가 화면에 보이는지 (true/false)
+  isElementViewport(el) {
+    const lastElement = el.getBoundingClientRect();
+
+    return (
+      lastElement.top >= 0 &&
+      lastElement.left >= 0 &&
+      lastElement.bottom <= window.innerHeight &&
+      lastElement.right <= window.innerWidth
+    );
+  }
+
+  // 스크롤 event
+  applyEventToEvent = (items) => {
+    document.addEventListener("scroll", () => {
+      items.forEach((el, index) => {
+        if (this.isElementViewport(el) && this.data.length - 1 === index) {
+          this.onNextPage();
+        }
+      });
+    });
+  };
 
   render() {
     if (this.data.length != 0) {
@@ -46,5 +69,7 @@ class SearchResult {
         </div>
       `;
     }
+    let listItems = this.$searchResult.querySelectorAll(".item");
+    this.applyEventToEvent(listItems);
   }
 }
