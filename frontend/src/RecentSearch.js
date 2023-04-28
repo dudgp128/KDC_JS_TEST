@@ -13,12 +13,16 @@ class RecentSearch {
     this.render();
   }
 
+  // localStorage('keywordHistory') 불러오기
+  getKeywordHistory() {
+    return localStorage.getItem("keywordHistory") === null
+      ? []
+      : localStorage.getItem("keywordHistory").split(",");
+  }
+
   // 최근 검색어 추가하기
   addKeyword(keyword) {
-    let words =
-      localStorage.getItem("keywordHistory") === null
-        ? []
-        : localStorage.getItem("keywordHistory").split(",");
+    let words = this.getKeywordHistory();
     words.unshift(keyword);
     localStorage.setItem("keywordHistory", words.join(","));
 
@@ -27,11 +31,7 @@ class RecentSearch {
 
   // 최근 검색 기록 가져오기
   init() {
-    let words =
-      localStorage.getItem("keywordHistory") === null
-        ? []
-        : localStorage.getItem("keywordHistory").split(",");
-    words = words.slice(0, 5);
+    let words = this.getKeywordHistory().slice(0, 5);
     this.setState(words);
   }
 
