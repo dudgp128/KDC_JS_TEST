@@ -20,7 +20,7 @@ class RecentSearch {
       : localStorage.getItem("keywordHistory").split(",");
   }
 
-  // 최근 검색어 추가하기
+  // 'keywordHistory' 추가하기
   addKeyword(keyword) {
     let words = this.getKeywordHistory();
     words.unshift(keyword);
@@ -29,13 +29,13 @@ class RecentSearch {
     this.init();
   }
 
-  // 최근 검색 기록 가져오기
+  // 가장 최근에 검색한 상위 키워드 5개 가져오기
   init() {
     let words = this.getKeywordHistory().slice(0, 5);
     this.setState(words);
   }
 
-  // 최근 검색 기록 업데이트 하기
+  // 'keywordHistory' 업데이트 하기
   setState(nextData) {
     this.data = nextData;
     this.render();
