@@ -17,6 +17,7 @@ class App {
       onSearch: (keyword) => {
         this.loading.show();
         api.fetchCats(keyword).then(({ data }) => {
+          localStorage.setItem("lastResult", JSON.stringify(data));
           this.loading.hide();
           this.recentSearch.addKeyword(keyword);
           this.setState(data);
@@ -63,6 +64,16 @@ class App {
         data: null,
       },
     });
+
+    this.init();
+  }
+
+  init() {
+    let lastResult =
+      localStorage.getItem("lastResult") != null
+        ? localStorage.getItem("lastResult")
+        : [];
+    this.setState(JSON.parse(lastResult));
   }
 
   setState(nextData) {
