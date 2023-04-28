@@ -40,7 +40,7 @@ class RecentSearch {
 
     this.$recentSearch.querySelectorAll("li button").forEach(($item, index) => {
       $item.addEventListener("click", () => {
-        this.onClick(this.wordList[index]);
+        this.onClick(this.data[index]);
       });
     });
   }
