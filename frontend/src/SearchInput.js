@@ -6,7 +6,12 @@ class SearchInput {
     const $searchInput = document.createElement("input");
     this.$searchInput = $searchInput;
     $searchInput.className = "SearchInput";
+    this.$searchInput.value =
+      localStorage.getItem("lastWord") != null
+        ? localStorage.getItem("lastWord")
+        : "";
     this.$searchInput.placeholder = "고양이를 검색해보세요.|";
+
     $wraaper.appendChild($searchInput);
 
     // 검색어 검색하기
@@ -28,6 +33,12 @@ class SearchInput {
     });
 
     $target.appendChild($wraaper);
+  }
+
+  initWord() {
+    let initword = localStorage.getItem("lastWord");
+    console.log(initword);
+    this.$searchInput.textContent = initword;
   }
   render() {}
 }

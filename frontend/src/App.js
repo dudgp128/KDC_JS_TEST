@@ -17,6 +17,7 @@ class App {
       onSearch: (keyword) => {
         this.loading.show();
         api.fetchCats(keyword).then(({ data }) => {
+          localStorage.setItem("lastWord", keyword);
           localStorage.setItem("lastResult", JSON.stringify(data));
           this.loading.hide();
           this.recentSearch.addKeyword(keyword);
