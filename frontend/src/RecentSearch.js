@@ -13,6 +13,18 @@ class RecentSearch {
     this.render();
   }
 
+  // 최근 검색어 추가하기
+  addKeyword(keyword) {
+    let words =
+      localStorage.getItem("keywordHistory") === null
+        ? []
+        : localStorage.getItem("keywordHistory").split(",");
+    words.unshift(keyword);
+    localStorage.setItem("keywordHistory", words.join(","));
+
+    this.init();
+  }
+
   // 최근 검색 기록 가져오기
   init() {
     let words =
