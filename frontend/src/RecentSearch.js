@@ -19,6 +19,7 @@ class RecentSearch {
       localStorage.getItem("keywordHistory") === null
         ? []
         : localStorage.getItem("keywordHistory").split(",");
+    words = words.slice(0, 5);
     this.setState(words);
   }
 
