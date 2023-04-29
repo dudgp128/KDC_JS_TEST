@@ -22,35 +22,25 @@ class SearchResult {
     this.render();
   }
 
-  // 'el' 요소가 화면에 보이는지 (true/false)
-  isElementViewport(el) {
-    const lastElement = el.getBoundingClientRect();
-
-    return (
-      lastElement.top >= 0 &&
-      lastElement.left >= 0 &&
-      lastElement.bottom <= window.innerHeight &&
-      lastElement.right <= window.innerWidth
-    );
-  }
-
-  // 스크롤 event
-  applyEventToEvent = (items) => {
-    document.addEventListener("scroll", () => {
-      items.forEach((el, index) => {
-        if (this.isElementViewport(el) && this.data.length - 1 === index) {
+  listObserver = new IntersectionObserver((items, observer) => {
+    items.forEach((item) => {
+      // 아이템이 화면에 보일때
+      if (item.isIntersecting) {
+        // 마지막 요소가 보일때
+        if (Number(item.target.dataset.index) + 1 === this.data.length) {
+          console.log("다음페이지");
           this.onNextPage();
         }
-      });
+      }
     });
-  };
+  });
 
   render() {
     if (this.data.length != 0) {
       this.$searchResult.innerHTML = this.data
         .map(
-          (cat) => `
-          <li class="item">
+          (cat, index) => `
+          <li class="item" data-index=${index}>
             <img src=${cat.url} alt=${cat.name} id=${cat.id}/>
           </li>
         `
@@ -61,6 +51,7 @@ class SearchResult {
         $item.addEventListener("click", () => {
           this.onClick(this.data[index]);
         });
+        this.listObserver.observe($item);
       });
     } else {
       this.$searchResult.innerHTML = `
@@ -69,7 +60,5 @@ class SearchResult {
         </div>
       `;
     }
-    let listItems = this.$searchResult.querySelectorAll(".item");
-    this.applyEventToEvent(listItems);
   }
 }
