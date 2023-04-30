@@ -65,3 +65,4 @@ class SearchResult {
     }
   }
 }
+export default SearchResult;
