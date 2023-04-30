@@ -59,7 +59,6 @@ class App {
       },
 
       onNextPage: () => {
-        console.log("업데이트");
         const lastWord = localStorage.getItem("lastWord");
         const page = this.page + 1;
         this.loading.show();
