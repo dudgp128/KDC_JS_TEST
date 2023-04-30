@@ -15,14 +15,10 @@ class ImageInfo {
     this.render();
   }
 
-  showDetail(data) {
-    api.fetchInfo(data.id).then(({ data }) => {
-      return this.setState({
-        visible: true,
-        data,
-      });
-    });
-  }
+  showDetail = async (cat) => {
+    const { data } = await api.fetchInfo(cat.id);
+    return this.setState({ visible: true, data });
+  };
 
   setState(nextData) {
     this.data = nextData;
