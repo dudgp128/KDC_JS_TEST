@@ -38,6 +38,15 @@ class SearchResult {
     });
   });
 
+  bindEvent = () => {
+    this.$searchResult.querySelectorAll(".item").forEach(($item, index) => {
+      $item.addEventListener("click", () => {
+        this.onClick(this.data[index]);
+      });
+      this.listObserver.observe($item);
+    });
+  };
+
   render() {
     if (this.data.length != 0) {
       this.$searchResult.innerHTML = this.data
@@ -50,12 +59,7 @@ class SearchResult {
         )
         .join("");
 
-      this.$searchResult.querySelectorAll(".item").forEach(($item, index) => {
-        $item.addEventListener("click", () => {
-          this.onClick(this.data[index]);
-        });
-        this.listObserver.observe($item);
-      });
+      this.bindEvent();
     } else {
       this.$searchResult.innerHTML = `
         <div> 
