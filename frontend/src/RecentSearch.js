@@ -22,9 +22,11 @@ class RecentSearch {
 
   // 'keywordHistory' 추가하기
   addKeyword(keyword) {
-    let words = this.getKeywordHistory();
-    words.unshift(keyword);
-    localStorage.setItem("keywordHistory", words.join(","));
+    let filterWords = this.getKeywordHistory().filter(
+      (word) => word != keyword
+    );
+    filterWords.unshift(keyword);
+    localStorage.setItem("keywordHistory", filterWords.join(","));
 
     this.init();
   }
