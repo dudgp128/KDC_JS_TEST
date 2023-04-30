@@ -1,8 +1,7 @@
-const API_ENDPOINT = "http://localhost:4001";
+import config from "./config.js";
 
-const REQUEST_ERROR = {
-  500: { msg: "요청 실패" },
-};
+const API_ENDPOINT = config.API_ENDPOINT;
+const REQUEST_ERROR = config.REQUEST_ERROR;
 
 const request = async (url) => {
   try {
