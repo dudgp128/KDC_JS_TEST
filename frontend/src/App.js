@@ -8,8 +8,11 @@ import api from "./api.js";
 
 class App {
   $target = null;
-  data = [];
-  page = 1;
+  DEFAULT_PAGE = 1;
+  data = {
+    items: [],
+    page: this.DEFAULT_PAGE,
+  };
 
   constructor($target) {
     this.$target = $target;
@@ -59,19 +62,19 @@ class App {
 
     this.searchResult = new SearchResult({
       $target,
-      initialData: this.data,
+      initialData: this.data.items,
       onClick: (data) => {
         this.imageInfo.showDetail(data);
       },
 
       onNextPage: () => {
         const lastWord = localStorage.getItem("lastWord");
-        const page = this.page + 1;
+        const nextPage = this.data.page + 1;
         this.loading.show();
-        api.fetchCatsPage(lastWord, page).then(({ data }) => {
-          let newData = this.data.concat(data);
+        api.fetchCatsPage(lastWord, nextPage).then(({ data }) => {
+          let newData = this.data.items.concat(data);
           this.setState(newData);
-          this.page = page;
+          this.data.page = nextPage;
           this.loading.hide();
         });
       },
@@ -98,7 +101,8 @@ class App {
 
   setState(nextData) {
     console.log(this);
-    this.data = nextData;
+    this.data.items = nextData;
+    console.log(this.data);
     this.searchResult.setState(nextData);
   }
 }
