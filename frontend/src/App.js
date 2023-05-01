@@ -102,7 +102,6 @@ class App {
   setState(nextData) {
     console.log(this);
     this.data.items = nextData;
-    console.log(this.data);
     this.searchResult.setState(nextData);
   }
 }
