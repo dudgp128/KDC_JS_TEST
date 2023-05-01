@@ -22,6 +22,7 @@ class ImageInfo {
 
   setState(nextData) {
     this.data = nextData;
+    this.setFade(nextData.visible);
     this.render();
   }
 
@@ -30,6 +31,14 @@ class ImageInfo {
       visible: false,
       data: undefined,
     });
+  }
+
+  setFade(visible) {
+    if (visible) {
+      this.$imageInfo.classList.add("show");
+    } else {
+      this.$imageInfo.classList.remove("show");
+    }
   }
 
   render() {
@@ -49,8 +58,6 @@ class ImageInfo {
           </div>
         </div>`;
 
-      this.$imageInfo.style.display = "block";
-
       // 모달 닫기
       document.addEventListener("click", (e) => {
         e.target.className === "close" || "ImageInfo"
@@ -61,8 +68,6 @@ class ImageInfo {
       document.addEventListener("keyup", (e) => {
         e.key === "Escape" ? this.closeImageInfo() : null;
       });
-    } else {
-      this.$imageInfo.style.display = "none";
     }
   }
 }
