@@ -2,12 +2,13 @@ class RecentSearch {
   $recentSearch = null;
   data = null;
 
-  constructor({ $target, onClick }) {
+  constructor({ $target, onSearch }) {
     const $recentSearch = document.createElement("section");
     this.$recentSearch = $recentSearch;
+    $recentSearch.className = "RecentSearch";
     $target.appendChild($recentSearch);
 
-    this.onClick = onClick;
+    this.onSearch = onSearch;
 
     this.init();
     this.render();
@@ -54,7 +55,7 @@ class RecentSearch {
 
     this.$recentSearch.querySelectorAll("li button").forEach(($item, index) => {
       $item.addEventListener("click", () => {
-        this.onClick(this.data[index]);
+        this.onSearch(this.data[index]);
       });
     });
   }

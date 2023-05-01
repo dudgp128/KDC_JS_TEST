@@ -30,7 +30,6 @@ class App {
           localStorage.setItem("lastWord", keyword);
           localStorage.setItem("lastResult", JSON.stringify(data));
           this.loading.hide();
-          this.recentSearch.addKeyword(keyword);
           this.setState(data);
         });
       },
@@ -47,17 +46,6 @@ class App {
 
     this.loading = new Loading({
       $target,
-    });
-
-    this.recentSearch = new RecentSearch({
-      $target,
-      onClick: (keyword) => {
-        this.loading.show();
-        api.fetchCats(keyword).then(({ data }) => {
-          this.loading.hide();
-          this.setState(data);
-        });
-      },
     });
 
     this.searchResult = new SearchResult({

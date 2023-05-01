@@ -1,7 +1,9 @@
+import RecentSearch from "./RecentSearch.js";
+
 class SearchInput {
   constructor({ $target, onSearch, onClick }) {
     const $wraaper = document.createElement("section");
-
+    $wraaper.className = "SearchInputSection";
     // 검색창
     const $searchInput = document.createElement("input");
     this.$searchInput = $searchInput;
@@ -18,6 +20,7 @@ class SearchInput {
     $searchInput.addEventListener("keypress", (e) => {
       if (e.key === "Enter") {
         onSearch(e.target.value);
+        this.RecentSearch.addKeyword(keyword);
       }
     });
 
@@ -33,6 +36,11 @@ class SearchInput {
     });
 
     $target.appendChild($wraaper);
+
+    this.RecentSearch = new RecentSearch({
+      $target: $wraaper,
+      onSearch,
+    });
   }
 
   initWord() {
