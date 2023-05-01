@@ -1,8 +1,11 @@
+import Empty from "./Empty.js";
+
 class SearchResult {
   $searchResult = null;
   data = null;
   onClick = null;
   onNextPage = null;
+  emtpy = null;
 
   constructor({ $target, initialData, onClick, onNextPage }) {
     this.$searchResult = document.createElement("ul");
@@ -13,6 +16,7 @@ class SearchResult {
     this.data = initialData;
     this.onClick = onClick;
     this.onNextPage = onNextPage;
+    this.emtpy = new Empty({ $target });
 
     this.render();
   }
@@ -49,6 +53,8 @@ class SearchResult {
 
   render() {
     if (this.data.length != 0) {
+      this.emtpy.hide();
+      this.$searchResult.style.display = "grid";
       this.$searchResult.innerHTML = this.data
         .map(
           (cat, index) => `
@@ -61,11 +67,8 @@ class SearchResult {
 
       this.bindEvent();
     } else {
-      this.$searchResult.innerHTML = `
-        <div> 
-          <p> 해당 검색 결과가 없습니다. </p>
-        </div>
-      `;
+      this.emtpy.show();
+      this.$searchResult.style.display = "none";
     }
   }
 }
