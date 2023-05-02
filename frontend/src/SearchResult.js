@@ -60,6 +60,9 @@ class SearchResult {
           (cat, index) => `
           <li class="item" data-index=${index}>
             <img src="https://dummyimage.com/200x300/b5b3b5/fff.png" data-src=${cat.url} alt=${cat.name} id=${cat.id}/>
+            <div class="content">
+              <p> ${cat.name} </p>
+            </div>
           </li>
         `
         )
