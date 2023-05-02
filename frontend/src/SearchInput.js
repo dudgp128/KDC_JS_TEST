@@ -19,10 +19,29 @@ class SearchInput {
     // 검색어 검색하기
     $searchInput.addEventListener("keypress", (e) => {
       if (e.key === "Enter") {
-        onSearch(e.target.value);
-        this.RecentSearch.addKeyword(keyword);
+        onSearch(e.target.value, limitCount[$options.selectedIndex]);
+        this.RecentSearch.addKeyword(e.target.value);
       }
     });
+
+    // 검색 결과 개수 제한하기
+    const $options = document.createElement("select");
+    this.$options = $options;
+
+    const limitCount = [10, 25, 50];
+
+    limitCount.forEach((e, i) => {
+      let $option = document.createElement("option");
+      $option.value = e;
+      $option.textContent = String(e).concat("개");
+
+      if (e === 50) {
+        $option.selected = true;
+      }
+      $options.appendChild($option);
+    });
+
+    $wraaper.appendChild($options);
 
     // 랜덤 버튼
     const $randomBtn = document.createElement("button");

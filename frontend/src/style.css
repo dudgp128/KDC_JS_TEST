@@ -123,6 +123,7 @@ body * {
 
 .SearchInputSection {
   position: relative;
+  width: 100%;
 }
 
 .RecentSearch{
@@ -138,8 +139,11 @@ body * {
   z-index: 20;
 }
 
+.SearchInputSection .options{
+  width: 10%;
+}
+
 .RandomBtn {
-  width: 18%;
   font-size: 40px;
   cursor: pointer;
 }

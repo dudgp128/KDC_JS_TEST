@@ -24,9 +24,9 @@ class App {
     this.searchInput = new SearchInput({
       $target,
       // 검색창
-      onSearch: (keyword) => {
+      onSearch: (keyword, limitCount) => {
         this.loading.show();
-        api.fetchCats(keyword).then(({ data }) => {
+        api.fetchCatsLimit(keyword, limitCount).then(({ data }) => {
           localStorage.setItem("lastWord", keyword);
           localStorage.setItem("lastResult", JSON.stringify(data));
           this.loading.hide();

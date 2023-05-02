@@ -21,6 +21,11 @@ const api = {
   fetchCats: async (keyword) => {
     return request(`${API_ENDPOINT}/api/cats/search?q=${keyword}`);
   },
+  fetchCatsLimit: async (keyword, limitCount) => {
+    return request(
+      `${API_ENDPOINT}/api/cats/search?q=${keyword}&limit=${limitCount}`
+    );
+  },
   fetchCatsPage: async (keyword, page) => {
     return request(`${API_ENDPOINT}/api/cats/search?q=${keyword}&page=${page}`);
   },
