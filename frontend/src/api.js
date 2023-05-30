@@ -32,6 +32,11 @@ const api = {
   fetchRandomCats: async () => {
     return request(`${API_ENDPOINT}/api/cats/random50`);
   },
+  fetchRandomCats: async () => {
+    let result = await request(`${API_ENDPOINT}/api/cats/random50`);
+
+    return result.data.slice(0, 5);
+  },
   fetchInfo: async (id) => {
     return request(`${API_ENDPOINT}/api/cats/${id}`);
   },

@@ -15,6 +15,18 @@ class App {
   };
 
   constructor($target) {
+    const $banner = document.createElement("ul");
+    $banner.className = "randomImgBanner";
+    this.$banner = $banner;
+
+    $target.appendChild($banner);
+
+    const bannerImg = async () => {
+      api.fetchRandomCats().then((data) => {
+        console.log(data);
+      });
+    };
+    bannerImg();
     this.$target = $target;
 
     this.darkmodeToggle = new DarkModeToggle({
